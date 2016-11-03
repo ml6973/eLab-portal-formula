@@ -21,6 +21,7 @@ eLab_packages:
       - mysql-server
       - php5 
       - php5-mysql
+      - php5-curl
       - python-pip
       - python-dev
       - libmysqlclient-dev
