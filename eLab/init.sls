@@ -1,9 +1,4 @@
-{% set mysql_root_password = salt['pillar.get']('mysql:server:root_password', salt['grains.get']('server_id')) %}
-{% set smtp_server = salt['pillar.get']('smtp:server', salt['grains.get']('server_id')) %}
-{% set smtp_port = salt['pillar.get']('smtp:port', salt['grains.get']('server_id')) %}
-{% set smtp_username = salt['pillar.get']('smtp:username', salt['grains.get']('server_id')) %}
-{% set smtp_password = salt['pillar.get']('smtp:password', salt['grains.get']('server_id')) %}
-{% set elgg_plugins = salt['pillar.get']('elgg:plugins', salt['grains.get']('server_id')) %}
+{% set mysql_root_password = salt['pillar.get']('eLab:mysql:server:root_password', salt['grains.get']('server_id')) %}
 
 
 #
@@ -20,6 +15,7 @@ eLab_packages:
       - tmux 
       - mysql-server
       - php5 
+      - php5-curl
       - php5-mysql
       - python-pip
       - python-dev
@@ -30,12 +26,12 @@ eLab_packages:
 MySQL-python:
   pip.installed:
     - require:
-      - pkg: python-pip
+      - pkg: eLab_packages
 
 requests:
   pip.installed:
     - require:
-      - pkg: python-pip
+      - pkg: eLab_packages
 
 #
 # Restart apache2 and make sure it is running
@@ -82,7 +78,7 @@ mysql -uroot -p{{ mysql_root_password }} < /root/eLab_backup.sql:
 clone repo:
   git.latest:
     - name: https://github.com/ml6973/eLab-GUI-web-portal.git 
-    - target: /opt/eLab-Portal
+    - target: /opt/eLab-GUI-web-portal
     - rev: master
 
 /opt/eLab-data:
@@ -105,6 +101,13 @@ copy web content:
     - recurse:
       - user
       - group
+
+/var/www/myConfig.ini:
+  file.managed:
+    - source: salt://eLab-portal-formula/files/myConfig.ini
+    - template: jinja
+    - defaults:
+      mysql_root_password: {{ mysql_root_password }}
 
 /etc/apache2/sites-available/000-default.conf:
   file.managed:
