@@ -82,7 +82,7 @@ mysql -uroot -p{{ mysql_root_password }} < /root/eLab_backup.sql:
 clone repo:
   git.latest:
     - name: https://github.com/ml6973/eLab-GUI-web-portal.git 
-    - target: /opt/eLab-Portal
+    - target: /opt/eLab-GUI-web-portal
     - rev: master
 
 /opt/eLab-data:
@@ -105,6 +105,10 @@ copy web content:
     - recurse:
       - user
       - group
+
+/var/www/myConfig.ini:
+  file.managed:
+    - source: salt://eLab-portal-formula/files/myConfig.ini
 
 /etc/apache2/sites-available/000-default.conf:
   file.managed:
