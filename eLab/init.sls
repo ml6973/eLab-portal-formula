@@ -30,12 +30,12 @@ eLab_packages:
 MySQL-python:
   pip.installed:
     - require:
-      - pkg: python-pip
+      - pkg: eLab_packages
 
 requests:
   pip.installed:
     - require:
-      - pkg: python-pip
+      - pkg: eLab_packages
 
 #
 # Restart apache2 and make sure it is running
