@@ -39,8 +39,6 @@ requests:
 apache2:
   service.running:
     - restart: True
-    - watch:
-      - file: /etc/php5/apache2/php.ini
 
 #
 # Enable mod_rewrite for eLab
