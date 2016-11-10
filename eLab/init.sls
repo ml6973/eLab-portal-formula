@@ -96,6 +96,13 @@ copy web content:
       - user
       - group
 
+remove index.html:
+  cmd.run: rm /var/www/html/index.html
+
+/var/www/html/index.php:
+  file.managed:
+    - source: salt://eLab-portal-formula/files/index.php
+
 /var/www/myConfig.ini:
   file.managed:
     - source: salt://eLab-portal-formula/files/myConfig.ini
