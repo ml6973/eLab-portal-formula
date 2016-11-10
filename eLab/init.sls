@@ -97,7 +97,8 @@ copy web content:
       - group
 
 remove index.html:
-  cmd.run: rm /var/www/html/index.html
+  cmd.run: 
+    - name: rm /var/www/html/index.html
 
 /var/www/html/index.php:
   file.managed:
