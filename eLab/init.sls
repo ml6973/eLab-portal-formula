@@ -81,12 +81,6 @@ clone repo:
     - target: /opt/eLab-GUI-web-portal
     - rev: master
 
-/opt/eLab-data:
-  file.directory:
-    - user: www-data
-    - group: www-data
-    - makedirs: True
-
 /var/www/html/eLab-GUI-web-portal:
   file.directory:
     - makedirs: True
