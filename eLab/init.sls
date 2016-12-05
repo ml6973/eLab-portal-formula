@@ -73,6 +73,18 @@ install Mongo PHP library:
   cmd.run:
     - name: sudo pecl install mongo
 
+/root/mongo_creatUser.txt:
+  file.managed:
+    - source: salt://eLab-portal-formula/files/mongo_createUser.txt
+    - user: root
+    - group: root
+    - mode: 644
+    - template: jinja
+
+create Mongo User:
+  cmd.run:
+    - name: sudo mongo < /root/mongo_createUser.txt
+     
 #
 # Copy sql backup template, set mysql password and update the database
 #
