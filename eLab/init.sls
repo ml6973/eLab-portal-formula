@@ -17,6 +17,8 @@ eLab_packages:
       - php5 
       - php5-curl
       - php5-mysql
+      - php5-dev
+      - php-pear
       - python-pip
       - python-dev
       - libmysqlclient-dev
@@ -48,6 +50,28 @@ apache2:
 Apache mod_rewrite:
   apache_module.enable:
     - name: rewrite
+#
+# Steps for getting MongoDB installed
+#
+import MongoDB key for Mongo pkg:
+  cmd.run:
+    - name: sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+
+get source file for MongoDB pkgs:
+  cmd.run:
+    - name: echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
+update Mongo Pkgs:
+  cmd.run:
+    - name: sudo apt-get update
+
+get the actual MongoiDB pkg:
+  cmd.run:
+    - name: sudo apt-get install -y mongodb-org
+
+install Mongo PHP library:
+  cmd.run:
+    - name: sudo pecl install mongo
 
 #
 # Copy sql backup template, set mysql password and update the database
@@ -122,3 +146,7 @@ remove index.html:
 
 service apache2 restart:
   cmd.run
+
+Mongo curl cmd to initialize on Apache:
+  cmd.run:
+    - name: curl -X GET http://127.0.0.1/eLab-GUI-web-portal/tests/makeMongo_tests.php
