@@ -1,2 +1,4 @@
-use admin
-db.createUser({user:"admin",pwd:"admin", roles:[{role:"root",db:"admin"}]})
+{% from "eLab-portal-formula/eLab/map.jinja" import eLab with context %}
+
+use {{ eLab.mongo.server.db }}
+db.createUser({user:"{{ eLab.mongo.server.username }}",pwd:"{{ eLab.mongo.server.password }}", roles:[{role:"root",db:"admin"}]})
