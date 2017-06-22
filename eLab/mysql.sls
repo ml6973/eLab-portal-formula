@@ -5,6 +5,7 @@ MySQL_packages:
   pkg:
     - installed
     - pkgs:
+      - python-dev
       - libmysqlclient-dev
       - mysql-server
       - python-pip
