@@ -19,7 +19,7 @@ apache2:
       - file: /etc/php5/apache2/php.ini
 
 Apache mod_rewrite:
-  apache_module.enable:
+  apache_module.enabled:
     - name: rewrite
 
 #
