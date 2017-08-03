@@ -3,8 +3,8 @@
 
 include:
   - eLab-portal-formula.eLab.packages
-  - eLab-portal-formula.eLab.mongo
 {% if grains['environment'] == 'develop' %}
+  - eLab-portal-formula.eLab.mongo
   - eLab-portal-formula.eLab.mysql
 {% endif %}
 
